@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Collection {
+  id           Int      @id @default(autoincrement())
+  anime_mal_id String
+  user_email   String
+  title        String
+  image        String
+  createdAt    DateTime @default(now())
+
+  @@unique([user_email, anime_mal_id])
+}
+
+model Comment {
+  id           Int      @id @default(autoincrement())
+  anime_mal_id String
+  user_email   String
+  username     String
+  user_avatar  String?
+  title        String
+  comment      String
+  createdAt    DateTime @default(now())
+
+  likes   CommentLike[]
+  replies CommentReply[]
+
+  @@index([anime_mal_id])
+}
+
+model CommentLike {
+  id         Int     @id @default(autoincrement())
+  comment_id Int
+  user_email String
+
+  comment Comment @relation(fields: [comment_id], references: [id])
+
+  @@unique([comment_id, user_email])
+}
+
+model CommentReply {
+  id         Int      @id @default(autoincrement())
+  comment_id Int
+  user_email String
+  username   String
+  reply      String
+  createdAt  DateTime @default(now())
+
+  comment Comment @relation(fields: [comment_id], references: [id])
+}

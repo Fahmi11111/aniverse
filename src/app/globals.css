@@ -1,6 +1,168 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= ROOT DESIGN SYSTEM ================= */
 
 :root {
+  --anime-primary: 139 92 246; /* fallback purple */
+}
+
+/* ================= RESET ================= */
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  transition: transform 0.4s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* ================= SELECTION ================= */
+
+::selection {
+  background: rgb(var(--anime-primary));
+  color: white;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 2s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= UTILITIES ================= */
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* ================= GLOW SYSTEM ================= */
+
+.glow-text {
+  text-shadow:
+    0 0 10px rgba(var(--anime-primary), 0.8),
+    0 0 30px rgba(var(--anime-primary), 0.6),
+    0 0 60px rgba(var(--anime-primary), 0.4);
+}
+
+.anime-glow {
+  box-shadow:
+    0 0 40px rgba(var(--anime-primary), 0.6),
+    0 0 100px rgba(var(--anime-primary), 0.3);
+}
+
+/* ================= GLASS SYSTEM ================= */
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ================= CINEMATIC BG ================= */
+
+.anime-bg {
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(var(--anime-primary), 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(var(--anime-primary), 0.2),
+      transparent 40%
+    );
+}
+
+/* ================= SCROLLBAR (PREMIUM LOOK) ================= */
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--anime-primary), 0.6);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--anime-primary), 0.9);
+}
+
+/* ================= PERSPECTIVE SUPPORT ================= */
+
+.perspective {
+  perspective: 1200px;
+}
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +185,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
